@@ -4,7 +4,7 @@
 #
 Name     : SDL
 Version  : 1.2.15
-Release  : 1
+Release  : 2
 URL      : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source0  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Summary  : Simple DirectMedia Layer
@@ -13,12 +13,19 @@ License  : GPL-2.0 LGPL-2.0 LGPL-2.1
 Requires: SDL-bin
 Requires: SDL-lib
 Requires: SDL-doc
-BuildRequires : alsa-lib-dev
 BuildRequires : glibc-staticdev
-BuildRequires : libXrandr-dev
+BuildRequires : pkgconfig(alsa)
+BuildRequires : pkgconfig(dbus-1)
+BuildRequires : pkgconfig(gl)
 BuildRequires : pkgconfig(ice)
+BuildRequires : pkgconfig(libpulse)
+BuildRequires : pkgconfig(libusb-1.0)
 BuildRequires : pkgconfig(x11)
+BuildRequires : pkgconfig(xcursor)
 BuildRequires : pkgconfig(xext)
+BuildRequires : pkgconfig(xi)
+BuildRequires : pkgconfig(xinerama)
+BuildRequires : pkgconfig(xrandr)
 Patch1: SDL-1.2.15-const_XData32.patch
 
 %description
