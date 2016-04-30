@@ -4,7 +4,7 @@
 #
 Name     : SDL
 Version  : 1.2.15
-Release  : 4
+Release  : 5
 URL      : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source0  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Summary  : Simple DirectMedia Layer
