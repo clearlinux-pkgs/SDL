@@ -4,7 +4,7 @@
 #
 Name     : SDL
 Version  : 1.2.15
-Release  : 6
+Release  : 7
 URL      : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source0  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Summary  : Simple DirectMedia Layer
@@ -75,6 +75,7 @@ lib components for the SDL package.
 %patch1 -p1
 
 %build
+export LANG=C
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -123,8 +124,8 @@ rm -rf %{buildroot}
 /usr/include/SDL/SDL_video.h
 /usr/include/SDL/begin_code.h
 /usr/include/SDL/close_code.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libSDL.so
+/usr/lib64/pkgconfig/sdl.pc
 /usr/share/aclocal/*.m4
 
 %files doc
@@ -133,4 +134,5 @@ rm -rf %{buildroot}
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libSDL-1.2.so.0
+/usr/lib64/libSDL-1.2.so.0.11.4
