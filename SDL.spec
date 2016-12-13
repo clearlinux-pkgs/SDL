@@ -4,7 +4,7 @@
 #
 Name     : SDL
 Version  : 1.2.15
-Release  : 8
+Release  : 9
 URL      : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source0  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Summary  : Simple DirectMedia Layer
@@ -13,7 +13,7 @@ License  : GPL-2.0 LGPL-2.0 LGPL-2.1
 Requires: SDL-bin
 Requires: SDL-lib
 Requires: SDL-doc
-BuildRequires : alsa-lib-dev
+BuildRequires : alsa-lib-dev32
 BuildRequires : gcc-dev32
 BuildRequires : gcc-libgcc32
 BuildRequires : gcc-libstdc++32
@@ -21,6 +21,12 @@ BuildRequires : glibc-dev32
 BuildRequires : glibc-libc32
 BuildRequires : glibc-staticdev
 BuildRequires : nasm-bin
+BuildRequires : pkgconfig(32alsa)
+BuildRequires : pkgconfig(32gl)
+BuildRequires : pkgconfig(32glu)
+BuildRequires : pkgconfig(32ice)
+BuildRequires : pkgconfig(32x11)
+BuildRequires : pkgconfig(32xext)
 BuildRequires : pkgconfig(alsa)
 BuildRequires : pkgconfig(dbus-1)
 BuildRequires : pkgconfig(gl)
@@ -110,9 +116,9 @@ make V=1  %{?_smp_mflags}
 
 pushd ../build32/
 export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
-export CFLAGS="$CFLAGS -m32 "
-export CXXFLAGS="$CXXFLAGS -m32 "
-export LDFLAGS="$LDFLAGS -m32 "
+export CFLAGS="$CFLAGS -m32"
+export CXXFLAGS="$CXXFLAGS -m32"
+export LDFLAGS="$LDFLAGS -m32"
 %configure --disable-static   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make V=1  %{?_smp_mflags}
 popd

@@ -13,3 +13,9 @@ xinerama
 xext
 xi
 libpulse
+32ice
+32gl
+32glu
+32alsa
+32x11
+32xext
