@@ -6,7 +6,7 @@
 #
 Name     : SDL
 Version  : 1.2.15
-Release  : 12
+Release  : 13
 URL      : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source0  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source99 : https://www.libsdl.org/release/SDL-1.2.15.tar.gz.sig
@@ -44,6 +44,7 @@ BuildRequires : pkgconfig(xi)
 BuildRequires : pkgconfig(xinerama)
 BuildRequires : pkgconfig(xrandr)
 Patch1: SDL-1.2.15-const_XData32.patch
+Patch2: likely.patch
 
 %description
 This is the Simple DirectMedia Layer, a generic API that provides low
@@ -107,13 +108,18 @@ lib32 components for the SDL package.
 %prep
 %setup -q -n SDL-1.2.15
 %patch1 -p1
+%patch2 -p1
 pushd ..
 cp -a SDL-1.2.15 build32
 popd
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1484496708
+export SOURCE_DATE_EPOCH=1491164630
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
+export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
+export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-semantic-interposition "
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -126,7 +132,7 @@ export LDFLAGS="$LDFLAGS -m32"
 make V=1  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1484496708
+export SOURCE_DATE_EPOCH=1491164630
 rm -rf %{buildroot}
 pushd ../build32/
 %make_install32

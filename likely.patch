@@ -1,0 +1,17 @@
+--- SDL-1.2.15/src/video/SDL_pixels.c~	2012-01-19 06:30:06.000000000 +0000
++++ SDL-1.2.15/src/video/SDL_pixels.c	2017-04-02 20:20:18.990077101 +0000
+@@ -336,12 +336,13 @@
+ 	return(pixel);
+ }
+ 
++#define likely(x)      __builtin_expect(!!(x), 1)
+ /* Find the opaque pixel value corresponding to an RGB triple */
+ Uint32 SDL_MapRGB
+ (const SDL_PixelFormat * const format,
+  const Uint8 r, const Uint8 g, const Uint8 b)
+ {
+-	if ( format->palette == NULL ) {
++	if (likely(format->palette == NULL)) {
+ 		return (r >> format->Rloss) << format->Rshift
+ 		       | (g >> format->Gloss) << format->Gshift
+ 		       | (b >> format->Bloss) << format->Bshift
