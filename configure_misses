@@ -1,0 +1,89 @@
+Configure miss: _strrev
+Configure miss: _strupr
+Configure miss: _strlwr
+Configure miss: itoa
+Configure miss: _ltoa
+Configure miss: _uitoa
+Configure miss: _ultoa
+Configure miss: _i64toa
+Configure miss: _ui64toa
+Configure miss: _stricmp
+Configure miss: _strnicmp
+Configure miss: libiconv_open in -liconv
+Configure miss: dlopen in -lc
+Configure miss: Altivec with GCC altivec.h and -maltivec option
+Configure miss: Altivec with GCC -maltivec option
+Configure miss: Altivec with GCC altivec.h and -faltivec option
+Configure miss: Altivec with GCC -faltivec option
+Configure miss: dmedia audio support
+Configure miss: artsc-config
+Configure miss: esd-config
+Configure miss: ESD - version >= 0.2.8
+Configure miss: audio/audiolib.h usability
+Configure miss: audio/audiolib.h presence
+Configure miss: audio/audiolib.h
+Configure miss: AuOpenServer in -laudio
+Configure miss: NAS audio support
+Configure miss: directfb-config
+Configure miss: DirectFB 0.9.15 support
+Configure miss: PlayStation 2 GS support
+Configure miss: PlayStation 3 Cell support
+Configure miss: SVGAlib (1.4.0+) support
+Configure miss: libVGL support
+Configure miss: wscons support
+Configure miss: Touchscreen library support
+Configure miss: hid_init in -lusbhid
+Configure miss: usb.h usability
+Configure miss: usb.h presence
+Configure miss: usb.h
+Configure miss: libusb.h usability
+Configure miss: libusb.h presence
+Configure miss: libusb.h
+Configure miss: hid_init in -lusb
+Configure miss: usbhid
+Configure miss: necessary GCC -Wno-multichar option
+Configure miss: i686-generic-linux-gnu-windres
+Configure miss: _strrev
+Configure miss: _strupr
+Configure miss: _strlwr
+Configure miss: itoa
+Configure miss: _ltoa
+Configure miss: _uitoa
+Configure miss: _ultoa
+Configure miss: _i64toa
+Configure miss: _ui64toa
+Configure miss: _stricmp
+Configure miss: _strnicmp
+Configure miss: libiconv_open in -liconv
+Configure miss: dlopen in -lc
+Configure miss: Altivec with GCC altivec.h and -maltivec option
+Configure miss: Altivec with GCC -maltivec option
+Configure miss: Altivec with GCC altivec.h and -faltivec option
+Configure miss: Altivec with GCC -faltivec option
+Configure miss: dmedia audio support
+Configure miss: artsc-config
+Configure miss: esd-config
+Configure miss: ESD - version >= 0.2.8
+Configure miss: audio/audiolib.h usability
+Configure miss: audio/audiolib.h presence
+Configure miss: audio/audiolib.h
+Configure miss: AuOpenServer in -laudio
+Configure miss: NAS audio support
+Configure miss: directfb-config
+Configure miss: DirectFB 0.9.15 support
+Configure miss: PlayStation 2 GS support
+Configure miss: PlayStation 3 Cell support
+Configure miss: SVGAlib (1.4.0+) support
+Configure miss: libVGL support
+Configure miss: wscons support
+Configure miss: Touchscreen library support
+Configure miss: hid_init in -lusbhid
+Configure miss: usb.h usability
+Configure miss: usb.h presence
+Configure miss: usb.h
+Configure miss: libusb.h usability
+Configure miss: libusb.h presence
+Configure miss: libusb.h
+Configure miss: hid_init in -lusb
+Configure miss: usbhid
+Configure miss: necessary GCC -Wno-multichar option
