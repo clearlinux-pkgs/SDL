@@ -1,2 +1,8 @@
 SDL-1.2.15-const_XData32.patch
 likely.patch
+CVE-2019-7574.patch
+CVE-2019-7577.patch
+CVE-2019-7572.patch
+CVE-2019-7578.patch
+CVE-2019-7575.patch
+CVE-2019-7638.patch

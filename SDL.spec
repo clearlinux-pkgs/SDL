@@ -6,7 +6,7 @@
 #
 Name     : SDL
 Version  : 1.2.15
-Release  : 19
+Release  : 20
 URL      : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source0  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source99 : https://www.libsdl.org/release/SDL-1.2.15.tar.gz.sig
@@ -45,6 +45,12 @@ BuildRequires : pkgconfig(xinerama)
 BuildRequires : pkgconfig(xrandr)
 Patch1: SDL-1.2.15-const_XData32.patch
 Patch2: likely.patch
+Patch3: CVE-2019-7574.patch
+Patch4: CVE-2019-7577.patch
+Patch5: CVE-2019-7572.patch
+Patch6: CVE-2019-7578.patch
+Patch7: CVE-2019-7575.patch
+Patch8: CVE-2019-7638.patch
 
 %description
 This is the Simple DirectMedia Layer, a generic API that provides low
@@ -112,6 +118,12 @@ license components for the SDL package.
 %setup -q -n SDL-1.2.15
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
 pushd ..
 cp -a SDL-1.2.15 build32
 popd
@@ -121,11 +133,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1546437945
-export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export SOURCE_DATE_EPOCH=1550262167
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static --disable-rpath
 make  %{?_smp_mflags}
 
@@ -139,7 +151,7 @@ export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1546437945
+export SOURCE_DATE_EPOCH=1550262167
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/SDL
 cp COPYING %{buildroot}/usr/share/package-licenses/SDL/COPYING
