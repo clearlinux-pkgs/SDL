@@ -6,10 +6,10 @@
 #
 Name     : SDL
 Version  : 1.2.15
-Release  : 24
+Release  : 25
 URL      : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source0  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
-Source99 : https://www.libsdl.org/release/SDL-1.2.15.tar.gz.sig
+Source1 : https://www.libsdl.org/release/SDL-1.2.15.tar.gz.sig
 Summary  : Simple DirectMedia Layer
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
@@ -54,6 +54,7 @@ Patch8: CVE-2019-7638.patch
 Patch9: CVE-2019-7636.nopatch
 Patch10: CVE-2019-7635.patch
 Patch11: CVE-2019-7637.patch
+Patch12: CVE-2019-13616.patch
 
 %description
 This is the Simple DirectMedia Layer, a generic API that provides low
@@ -130,6 +131,7 @@ license components for the SDL package.
 %patch8 -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
 pushd ..
 cp -a SDL-1.2.15 build32
 popd
@@ -138,8 +140,8 @@ popd
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1561661305
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1564515150
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -161,7 +163,7 @@ export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1561661305
+export SOURCE_DATE_EPOCH=1564515150
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/SDL
 cp COPYING %{buildroot}/usr/share/package-licenses/SDL/COPYING
