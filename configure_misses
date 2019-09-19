@@ -1,3 +1,4 @@
+Configure miss: windres
 Configure miss: _strrev
 Configure miss: _strupr
 Configure miss: _strlwr
@@ -43,6 +44,7 @@ Configure miss: hid_init in -lusb
 Configure miss: usbhid
 Configure miss: necessary GCC -Wno-multichar option
 Configure miss: i686-generic-linux-gnu-windres
+Configure miss: windres
 Configure miss: _strrev
 Configure miss: _strupr
 Configure miss: _strlwr
