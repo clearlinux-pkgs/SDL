@@ -10,3 +10,4 @@ CVE-2019-7636.nopatch
 CVE-2019-7635.patch
 CVE-2019-7637.patch
 CVE-2019-13616.patch
+SDL-1.2.15-no-default-backing-store.patch
