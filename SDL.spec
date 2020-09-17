@@ -6,30 +6,19 @@
 #
 Name     : SDL
 Version  : 1.2.15
-Release  : 29
+Release  : 30
 URL      : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source0  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
-Source1 : https://www.libsdl.org/release/SDL-1.2.15.tar.gz.sig
+Source1  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz.sig
 Summary  : Simple DirectMedia Layer
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
 Requires: SDL-bin = %{version}-%{release}
 Requires: SDL-lib = %{version}-%{release}
 Requires: SDL-license = %{version}-%{release}
-BuildRequires : alsa-lib-dev32
-BuildRequires : gcc-dev32
-BuildRequires : gcc-libgcc32
-BuildRequires : gcc-libstdc++32
-BuildRequires : glibc-dev32
-BuildRequires : glibc-libc32
+BuildRequires : alsa-lib-dev
 BuildRequires : glibc-staticdev
 BuildRequires : nasm-bin
-BuildRequires : pkgconfig(32alsa)
-BuildRequires : pkgconfig(32gl)
-BuildRequires : pkgconfig(32glu)
-BuildRequires : pkgconfig(32ice)
-BuildRequires : pkgconfig(32x11)
-BuildRequires : pkgconfig(32xext)
 BuildRequires : pkgconfig(alsa)
 BuildRequires : pkgconfig(dbus-1)
 BuildRequires : pkgconfig(gl)
@@ -83,17 +72,6 @@ Requires: SDL = %{version}-%{release}
 dev components for the SDL package.
 
 
-%package dev32
-Summary: dev32 components for the SDL package.
-Group: Default
-Requires: SDL-lib32 = %{version}-%{release}
-Requires: SDL-bin = %{version}-%{release}
-Requires: SDL-dev = %{version}-%{release}
-
-%description dev32
-dev32 components for the SDL package.
-
-
 %package lib
 Summary: lib components for the SDL package.
 Group: Libraries
@@ -101,15 +79,6 @@ Requires: SDL-license = %{version}-%{release}
 
 %description lib
 lib components for the SDL package.
-
-
-%package lib32
-Summary: lib32 components for the SDL package.
-Group: Default
-Requires: SDL-license = %{version}-%{release}
-
-%description lib32
-lib32 components for the SDL package.
 
 
 %package license
@@ -122,6 +91,7 @@ license components for the SDL package.
 
 %prep
 %setup -q -n SDL-1.2.15
+cd %{_builddir}/SDL-1.2.15
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -134,52 +104,31 @@ license components for the SDL package.
 %patch11 -p1
 %patch12 -p1
 %patch13 -p1
-pushd ..
-cp -a SDL-1.2.15 build32
-popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1577955797
+export SOURCE_DATE_EPOCH=1600305573
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$FFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static --disable-rpath
 make  %{?_smp_mflags}
 
-pushd ../build32/
-export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
-export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
-export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
-export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
-export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
-%configure --disable-static --disable-rpath   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
-make  %{?_smp_mflags}
-popd
 %install
-export SOURCE_DATE_EPOCH=1577955797
+export SOURCE_DATE_EPOCH=1600305573
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/SDL
-cp COPYING %{buildroot}/usr/share/package-licenses/SDL/COPYING
-cp Xcode/SDL/pkg-support/resources/License.rtf %{buildroot}/usr/share/package-licenses/SDL/Xcode_SDL_pkg-support_resources_License.rtf
-cp src/hermes/COPYING.LIB %{buildroot}/usr/share/package-licenses/SDL/src_hermes_COPYING.LIB
-pushd ../build32/
-%make_install32
-if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
-then
-pushd %{buildroot}/usr/lib32/pkgconfig
-for i in *.pc ; do ln -s $i 32$i ; done
-popd
-fi
-popd
+cp %{_builddir}/SDL-1.2.15/COPYING %{buildroot}/usr/share/package-licenses/SDL/720ac006232639ed551ce48d638dee35f8d378d4
+cp %{_builddir}/SDL-1.2.15/Xcode/SDL/pkg-support/resources/License.rtf %{buildroot}/usr/share/package-licenses/SDL/a6e94b0f7b8b11f4d640936574684dbe70c10a49
+cp %{_builddir}/SDL-1.2.15/src/hermes/COPYING.LIB %{buildroot}/usr/share/package-licenses/SDL/293ea6c85b498c82ead8a6fb17ea22df24d8f798
 %make_install
 
 %files
@@ -401,24 +350,13 @@ popd
 /usr/share/man/man3/SDL_mutexP.3
 /usr/share/man/man3/SDL_mutexV.3
 
-%files dev32
-%defattr(-,root,root,-)
-/usr/lib32/libSDL.so
-/usr/lib32/pkgconfig/32sdl.pc
-/usr/lib32/pkgconfig/sdl.pc
-
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libSDL-1.2.so.0
 /usr/lib64/libSDL-1.2.so.0.11.4
 
-%files lib32
-%defattr(-,root,root,-)
-/usr/lib32/libSDL-1.2.so.0
-/usr/lib32/libSDL-1.2.so.0.11.4
-
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/SDL/COPYING
-/usr/share/package-licenses/SDL/Xcode_SDL_pkg-support_resources_License.rtf
-/usr/share/package-licenses/SDL/src_hermes_COPYING.LIB
+/usr/share/package-licenses/SDL/293ea6c85b498c82ead8a6fb17ea22df24d8f798
+/usr/share/package-licenses/SDL/720ac006232639ed551ce48d638dee35f8d378d4
+/usr/share/package-licenses/SDL/a6e94b0f7b8b11f4d640936574684dbe70c10a49
