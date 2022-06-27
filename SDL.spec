@@ -6,7 +6,7 @@
 #
 Name     : SDL
 Version  : 1.2.15
-Release  : 34
+Release  : 35
 URL      : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source0  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source1  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz.sig
@@ -14,7 +14,6 @@ Summary  : Simple DirectMedia Layer
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
 Requires: SDL-bin = %{version}-%{release}
-Requires: SDL-filemap = %{version}-%{release}
 Requires: SDL-lib = %{version}-%{release}
 Requires: SDL-license = %{version}-%{release}
 BuildRequires : alsa-lib-dev
@@ -56,7 +55,6 @@ multiple platforms.
 Summary: bin components for the SDL package.
 Group: Binaries
 Requires: SDL-license = %{version}-%{release}
-Requires: SDL-filemap = %{version}-%{release}
 
 %description bin
 bin components for the SDL package.
@@ -74,19 +72,10 @@ Requires: SDL = %{version}-%{release}
 dev components for the SDL package.
 
 
-%package filemap
-Summary: filemap components for the SDL package.
-Group: Default
-
-%description filemap
-filemap components for the SDL package.
-
-
 %package lib
 Summary: lib components for the SDL package.
 Group: Libraries
 Requires: SDL-license = %{version}-%{release}
-Requires: SDL-filemap = %{version}-%{release}
 
 %description lib
 lib components for the SDL package.
@@ -124,30 +113,30 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1634223972
+export SOURCE_DATE_EPOCH=1656362206
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
 %configure --disable-static --disable-rpath
 make  %{?_smp_mflags}
 
 unset PKG_CONFIG_PATH
 pushd ../buildavx2/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3"
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3"
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v3"
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 %configure --disable-static --disable-rpath
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1634223972
+export SOURCE_DATE_EPOCH=1656362206
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/SDL
 cp %{_builddir}/SDL-1.2.15/COPYING %{buildroot}/usr/share/package-licenses/SDL/720ac006232639ed551ce48d638dee35f8d378d4
@@ -157,7 +146,7 @@ pushd ../buildavx2/
 %make_install_v3
 popd
 %make_install
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -200,6 +189,7 @@ popd
 /usr/include/SDL/SDL_video.h
 /usr/include/SDL/begin_code.h
 /usr/include/SDL/close_code.h
+/usr/lib64/glibc-hwcaps/x86-64-v3/libSDL.so
 /usr/lib64/libSDL.so
 /usr/lib64/pkgconfig/sdl.pc
 /usr/share/aclocal/*.m4
@@ -378,15 +368,12 @@ popd
 /usr/share/man/man3/SDL_mutexP.3
 /usr/share/man/man3/SDL_mutexV.3
 
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-SDL
-
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/glibc-hwcaps/x86-64-v3/libSDL-1.2.so.0
+/usr/lib64/glibc-hwcaps/x86-64-v3/libSDL-1.2.so.0.11.4
 /usr/lib64/libSDL-1.2.so.0
 /usr/lib64/libSDL-1.2.so.0.11.4
-/usr/share/clear/optimized-elf/lib*
 
 %files license
 %defattr(0644,root,root,0755)
