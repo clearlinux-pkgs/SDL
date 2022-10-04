@@ -6,7 +6,7 @@
 #
 Name     : SDL
 Version  : 1.2.15
-Release  : 40
+Release  : 41
 URL      : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source0  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source1  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz.sig
@@ -122,7 +122,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1662581726
+export SOURCE_DATE_EPOCH=1664907960
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -145,12 +145,12 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1662581726
+export SOURCE_DATE_EPOCH=1664907960
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/SDL
-cp %{_builddir}/SDL-%{version}/COPYING %{buildroot}/usr/share/package-licenses/SDL/720ac006232639ed551ce48d638dee35f8d378d4
-cp %{_builddir}/SDL-%{version}/Xcode/SDL/pkg-support/resources/License.rtf %{buildroot}/usr/share/package-licenses/SDL/a6e94b0f7b8b11f4d640936574684dbe70c10a49
-cp %{_builddir}/SDL-%{version}/src/hermes/COPYING.LIB %{buildroot}/usr/share/package-licenses/SDL/293ea6c85b498c82ead8a6fb17ea22df24d8f798
+cp %{_builddir}/SDL-%{version}/COPYING %{buildroot}/usr/share/package-licenses/SDL/720ac006232639ed551ce48d638dee35f8d378d4 || :
+cp %{_builddir}/SDL-%{version}/Xcode/SDL/pkg-support/resources/License.rtf %{buildroot}/usr/share/package-licenses/SDL/a6e94b0f7b8b11f4d640936574684dbe70c10a49 || :
+cp %{_builddir}/SDL-%{version}/src/hermes/COPYING.LIB %{buildroot}/usr/share/package-licenses/SDL/293ea6c85b498c82ead8a6fb17ea22df24d8f798 || :
 pushd ../buildavx2/
 %make_install_v3
 popd
