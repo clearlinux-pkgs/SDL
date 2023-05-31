@@ -7,7 +7,7 @@
 #
 Name     : SDL
 Version  : 1.2.15
-Release  : 43
+Release  : 44
 URL      : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source0  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 Source1  : https://www.libsdl.org/release/SDL-1.2.15.tar.gz.sig
@@ -118,7 +118,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683230546
+export SOURCE_DATE_EPOCH=1685505403
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -141,7 +141,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1683230546
+export SOURCE_DATE_EPOCH=1685505403
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/SDL
 cp %{_builddir}/SDL-%{version}/COPYING %{buildroot}/usr/share/package-licenses/SDL/720ac006232639ed551ce48d638dee35f8d378d4 || :
@@ -162,7 +162,6 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libSDL.so
 /usr/include/SDL/SDL.h
 /usr/include/SDL/SDL_active.h
 /usr/include/SDL/SDL_audio.h
@@ -375,7 +374,6 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libSDL-1.2.so.0
 /V3/usr/lib64/libSDL-1.2.so.0.11.4
 /usr/lib64/libSDL-1.2.so.0
 /usr/lib64/libSDL-1.2.so.0.11.4
